@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root "pages#index"
+
+  resource :todo_list, only: :show
+  resources :todo_items
 end

@@ -1,0 +1,25 @@
+<h1><%= @todo_list.name %></h1>
+
+<% if flash[:alert] %>
+  <div>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div>
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<%= form_for @new_item do |f| %>
+  <%= f.hidden_field :todo_list_id, value: @todo_list.id %>
+  <%= f.text_field :title, placeholder: "New item..." %>
+  <%= f.submit "Add" %>
+<% end %>
+
+<ul>
+  <% @todo_items.each do |item| %>
+    <li><%= item.title %></li>
+  <% end %>
+</ul>
