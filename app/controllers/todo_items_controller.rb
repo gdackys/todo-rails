@@ -9,6 +9,16 @@ class TodoItemsController < ApplicationController
     end
   end
 
+  def destroy
+    todo_item = TodoItem.find(params[:id])
+
+    if todo_item.destroy
+      redirect_to todo_list_path, notice: "Deleted"
+    else
+      redirect_to todo_list_path, alert: "Error"
+    end
+  end
+
   private
 
   def safe_params

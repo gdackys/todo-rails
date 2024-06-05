@@ -20,6 +20,9 @@
 
 <ul>
   <% @todo_items.each do |item| %>
-    <li><%= item.title %></li>
+    <li>
+      <%= item.title %>
+      <%= button_to "Delete", todo_item_path(item), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
+    </li>
   <% end %>
 </ul>

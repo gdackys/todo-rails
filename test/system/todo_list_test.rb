@@ -24,4 +24,12 @@ class TodoListTest < ApplicationSystemTestCase
 
     assert_text "Error"
   end
+
+  test "deleting a todo item" do
+    visit todo_list_url
+
+    accept_confirm { click_on "Delete" }
+
+    assert_text "Deleted"
+  end
 end
