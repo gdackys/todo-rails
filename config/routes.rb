@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   root "pages#index"
 
   resource :todo_list, only: :show
-  resources :todo_items
+  resources :todo_items do
+    member do
+      patch :toggle
+    end
+  end
 end

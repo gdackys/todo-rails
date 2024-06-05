@@ -9,6 +9,14 @@ class TodoItemsController < ApplicationController
     end
   end
 
+  def toggle
+    todo_item = TodoItem.find(params[:id])
+    todo_item.toggle!(:done)
+
+    flash[:notice] = "Done" if todo_item.done?
+    redirect_to todo_list_path
+  end
+
   def destroy
     todo_item = TodoItem.find(params[:id])
 

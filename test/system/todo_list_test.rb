@@ -25,6 +25,16 @@ class TodoListTest < ApplicationSystemTestCase
     assert_text "Error"
   end
 
+  test "toggling a todo item" do
+    todo_item = todo_items(:one)
+
+    visit todo_list_url
+
+    check "toggle_todo_item_#{todo_item.id}"
+
+    assert_text "Done"
+  end
+
   test "deleting a todo item" do
     visit todo_list_url
 

@@ -21,6 +21,9 @@
 <ul>
   <% @todo_items.each do |item| %>
     <li>
+      <%= form_with model: item, url: toggle_todo_item_path(item), method: :patch, data: {controller: "toggle-todo-item"} do |f| %>
+        <%= f.check_box :done, id: dom_id(item, "toggle"), data: {action: "toggle-todo-item#toggle"} %>
+      <% end %>
       <%= item.title %>
       <%= button_to "Delete", todo_item_path(item), method: :delete, data: {turbo_confirm: "Are you sure?"} %>
     </li>
