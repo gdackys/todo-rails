@@ -1,3 +1,3 @@
 class TodoList < ApplicationRecord
-  has_many :todo_items, dependent: :delete_all
+  has_many :todo_items, -> { order(id: :desc) }, dependent: :delete_all
 end

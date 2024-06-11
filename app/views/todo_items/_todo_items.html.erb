@@ -1,0 +1,10 @@
+<div id="todo-items" class="card my-4 shadow-sm">
+  <ul class="list-group list-group-flush">
+    <%= render todo_items %>
+    <% if todo_items.empty? %>
+      <li class="list-group-item text-center p-5 fs-1">
+        <i class="bi bi-check2-square"></i> Nothing to do
+      </li>
+    <% end %>
+  </ul>
+</div>

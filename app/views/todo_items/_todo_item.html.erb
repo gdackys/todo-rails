@@ -1,0 +1,17 @@
+<li id="<%= dom_id(todo_item) %>" class="list-group-item">
+  <div class="row align-items-center">
+    <div class="col col-auto">
+      <%= form_with model: todo_item, url: toggle_todo_list_todo_item_path(todo_item.todo_list, todo_item), method: :patch, data: {controller: "toggle-todo-item"} do |f| %>
+        <%= f.check_box :done, id: dom_id(todo_item, "toggle"), data: {action: "toggle-todo-item#toggle"}, class: "form-check-input" %>
+      <% end %>
+    </div>
+    <div class="<%= class_names("col", "fs-5", "text-decoration-line-through": todo_item.done?) %>">
+      <%= todo_item.title %>
+    </div>
+    <div class="col col-auto">
+      <%= button_to [todo_item.todo_list, todo_item], title: "Delete", method: :delete, data: {turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" do %>
+        <i class="bi bi-trash3-fill"></i>
+      <% end %>
+    </div>
+  </div>
+</li>

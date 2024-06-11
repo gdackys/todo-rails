@@ -1,52 +1,7 @@
 <h1 class="display-1 text-center mt-4"><%= @todo_list.name %></h1>
 
-<%= form_for @new_item, html: {class: "my-4"} do |f| %>
-  <%= f.hidden_field :todo_list_id, value: @todo_list.id %>
-  <div class="input-group">
-    <%= f.text_field :title, placeholder: "New item...", class: "form-control form-control-lg" %>
-    <%= f.submit "Add", class: "btn btn-primary btn-lg" %>
-  </div>
-<% end %>
+<%= render "todo_items/new_item", todo_list: @todo_list, todo_item: TodoItem.new %>
 
-<div class="card my-4 shadow-sm">
-  <ul class="list-group list-group-flush">
-    <% if @todo_items.empty? %>
-      <li class="list-group-item text-center p-5 fs-1">
-        <i class="bi bi-check2-square"></i> All done
-      </li>
-    <% end %>
-    <% @todo_items.each do |item| %>
-      <li class="list-group-item">
-        <div class="row align-items-center">
-          <div class="col col-auto">
-            <%= form_with model: item, url: toggle_todo_item_path(item), method: :patch, data: {controller: "toggle-todo-item"} do |f| %>
-              <%= f.check_box :done, id: dom_id(item, "toggle"), data: {action: "toggle-todo-item#toggle"}, class: "form-check-input" %>
-            <% end %>
-          </div>
-          <div class="col fs-5">
-            <%= item.title %>
-          </div>
-          <div class="col col-auto">
-            <%= button_to todo_item_path(item), title: "Delete", method: :delete, data: {turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" do %>
-              <i class="bi bi-trash3-fill"></i>
-            <% end %>
-          </div>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-</div>
+<%= render "todo_items/todo_items", todo_items: @todo_list.todo_items %>
 
-<div class="container position-absolute bottom-0 start-50 translate-middle-x">
-  <% if flash[:notice] %>
-    <div class="alert alert-primary shadow-lg">
-      <%= flash[:notice] %>
-    </div>
-  <% end %>
-
-  <% if flash[:alert] %>
-    <div class="alert alert-danger shadow-lg">
-      <%= flash[:alert] %>
-    </div>
-  <% end %>
-</div>
+<%= render "application/flashes" %>

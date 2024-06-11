@@ -1,0 +1,2 @@
+<%= turbo_stream.replace "todo-items", partial: "todo_items", locals: {todo_items: @todo_items} %>
+<%= turbo_stream.update "application-flashes", partial: "notice_flash" %>

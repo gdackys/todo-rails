@@ -1,0 +1,6 @@
+<%= form_for [todo_list, todo_item], data: {controller: "reset-form", action: "turbo:submit-end->reset-form#reset"}, html: {class: "my-4"} do |f| %>
+  <div class="input-group">
+    <%= f.text_field :title, placeholder: "New item...", class: "form-control form-control-lg" %>
+    <%= f.submit "Add", class: "btn btn-primary btn-lg" %>
+  </div>
+<% end %>

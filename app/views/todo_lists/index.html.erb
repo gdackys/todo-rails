@@ -1,0 +1,11 @@
+<h1 class="display-1 text-center mt-4">My Todo Lists</h1>
+
+<div class="card my-4 shadow-sm">
+  <ul class="list-group list-group-flush">
+    <% @todo_lists.each do |list| %>
+      <li class="list-group-item fs-5">
+        <%= link_to list.name, list %>
+      </li>
+    <% end %>
+  </ul>
+</div>
