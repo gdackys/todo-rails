@@ -9,9 +9,14 @@
       <%= todo_item.title %>
     </div>
     <div class="col col-auto">
-      <%= button_to [todo_item.todo_list, todo_item], title: "Delete", method: :delete, data: {turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" do %>
-        <i class="bi bi-trash3-fill"></i>
-      <% end %>
+      <div class="btn-group">
+        <%= link_to edit_todo_list_todo_item_path(todo_item.todo_list, todo_item), title: "Edit", data: {turbo_stream: true}, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-pencil-square"></i>
+        <% end %>
+        <%= link_to [todo_item.todo_list, todo_item], title: "Delete", data: {turbo_confirm: "Are you sure?", turbo_method: :delete}, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-trash3-fill"></i>
+        <% end %>
+      </div>
     </div>
   </div>
 </li>

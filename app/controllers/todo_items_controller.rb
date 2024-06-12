@@ -1,6 +1,10 @@
 class TodoItemsController < ApplicationController
   before_action :set_todo_list
   before_action :set_todo_items
+  before_action :set_todo_item, only: [:show, :edit, :update, :toggle, :destroy]
+
+  def show
+  end
 
   def create
     @todo_item = @todo_items.build(safe_params)
@@ -20,8 +24,26 @@ class TodoItemsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    respond_to do |format|
+      if @todo_item.update(safe_params)
+        flash[:notice] = "Updated"
+
+        format.turbo_stream
+        format.html { redirect_to todo_list_path(@todo_list) }
+      else
+        flash[:alert] = "Error"
+
+        format.turbo_stream { render "alert" }
+        format.html { redirect_to todo_list_path(@todo_list) }
+      end
+    end
+  end
+
   def toggle
-    @todo_item = @todo_items.find(params[:id])
     @todo_item.toggle!(:done)
 
     flash[:notice] = "Done" if @todo_item.done?
@@ -33,8 +55,6 @@ class TodoItemsController < ApplicationController
   end
 
   def destroy
-    @todo_item = @todo_items.find(params[:id])
-
     respond_to do |format|
       if @todo_item.destroy
         flash[:notice] = "Deleted"
@@ -62,5 +82,9 @@ class TodoItemsController < ApplicationController
 
   def set_todo_items
     @todo_items = @todo_list.todo_items
+  end
+
+  def set_todo_item
+    @todo_item = @todo_items.find(params[:id])
   end
 end

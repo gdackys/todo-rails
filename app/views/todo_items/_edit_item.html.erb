@@ -1,0 +1,24 @@
+<li id="<%= dom_id(todo_item) %>" class="list-group-item">
+  <div class="row align-items-center">
+    <div class="col col-auto">
+      <%= form_with model: todo_item, url: "" do |f| %>
+        <%= f.check_box :done, class: "form-check-input", disabled: true %>
+      <% end %>
+    </div>
+    <div class="col fs-5">
+      <%= form_for [todo_item.todo_list, todo_item], id: dom_id(todo_item, "edit") do |f| %>
+        <%= f.text_field :title, class: "form-control", placeholder: "Item title..." %>
+      <% end %>
+    </div>
+    <div class="col col-auto">
+      <div class="btn-group">
+        <button title="Save" class="btn btn-outline-secondary" type="submit" form="<%= dom_id(todo_item, "edit") %>">
+          <i class="bi bi-floppy-fill"></i>
+        </button>
+        <%= link_to [todo_item.todo_list, todo_item], title: "Cancel", data: {turbo_stream: true}, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-x-circle"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</li>

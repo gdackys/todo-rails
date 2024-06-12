@@ -30,6 +30,31 @@ class TodoItemsTest < ApplicationSystemTestCase
     assert_text "Error"
   end
 
+  test "updating a todo item" do
+    visit todo_list_url(@todo_list)
+
+    click_on "Edit", match: :first
+
+    fill_in "Item title...", with: "Updated Todo Item"
+
+    click_on "Save"
+
+    assert_text "Updated Todo Item"
+    assert_text "Updated"
+  end
+
+  test "updating a todo item erroneously" do
+    visit todo_list_url(@todo_list)
+
+    click_on "Edit", match: :first
+
+    fill_in "Item title...", with: ""
+
+    click_on "Save"
+
+    assert_text "Error"
+  end
+
   test "toggling a todo item" do
     todo_item = todo_items(:one)
 
